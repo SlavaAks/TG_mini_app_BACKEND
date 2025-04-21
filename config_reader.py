@@ -12,8 +12,8 @@ class Config(BaseSettings):
     SPREADSHEET_ID: SecretStr
     MANAGER_ID: SecretStr
 
-    WEBHOOK_URL: str = "https://example.com"
-    WEBAPP_URL: str = "https://example.com"
+    WEBHOOK_URL: str = "https://jill-linking-trend-grave.trycloudflare.com"
+    WEBAPP_URL: str = "https://stan-pubs-transcript-chrome.trycloudflare.com"
 
     APP_HOST: str = "localhost"
     APP_PORT: int = 8080
@@ -24,7 +24,9 @@ class Config(BaseSettings):
     )
 
 
-config = Config()
+def init_bot():
+    bot = Bot(token=config.BOT_TOKEN.get_secret_value())
+    dp = Dispatcher()
+    return bot, dp
 
-bot: Bot = None
-dp: Dispatcher = Dispatcher()
+config = Config()

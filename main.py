@@ -9,38 +9,43 @@ import config_reader
 from bot.handlers import setup_routers as setup_bot_routers
 from api import setup_routers as setup_api_routers
 
-from config_reader import dp, config
+from config_reader import config, init_bot
+
+
+def create_app() -> FastAPI:
+    app = FastAPI(lifespan=lifespan)
+
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=['*'],
+        allow_credentials=True,
+        allow_methods=['*'],
+        allow_headers=['*'],
+    )
+
+    app.include_router(setup_api_routers())
+
+    return app
 
 
 async def lifespan(app: FastAPI) -> AsyncGenerator:
-    bot = Bot(config.BOT_TOKEN.get_secret_value())
-    config_reader.bot = bot
-
+    bot, dp = init_bot()
     app.state.bot = bot
     app.state.dp = dp
 
+    dp.include_router(setup_bot_routers())
     await bot.set_webhook(
         url=f"{config.WEBHOOK_URL}/webhook",
         allowed_updates=dp.resolve_used_update_types(),
-        drop_pending_updates=True
+        drop_pending_updates=True,
     )
 
     yield
+
     await bot.session.close()
 
 
-app = FastAPI(lifespan=lifespan)
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=['*'],
-    allow_credentials=True,
-    allow_methods=['*'],
-    allow_headers=['*'],
-)
-
-dp.include_router(setup_bot_routers())
-app.include_router(setup_api_routers())
+app = create_app()
 
 
 @app.get("/")

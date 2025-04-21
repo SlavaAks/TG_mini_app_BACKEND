@@ -2,7 +2,6 @@ from fastapi import APIRouter, Request
 
 from aiogram.types import Update
 
-from config_reader import bot, dp
 
 from fastapi.responses import StreamingResponse
 import asyncio
@@ -33,6 +32,9 @@ async def sse(request: Request):
 @router.post("/webhook")
 async def webhook(request: Request) -> None:
     try:
+        bot = request.app.state.bot
+        dp = request.app.state.dp
+
         data = await request.json()
         update = Update.model_validate(data, context={"bot": bot})
         await dp.feed_update(bot, update)
