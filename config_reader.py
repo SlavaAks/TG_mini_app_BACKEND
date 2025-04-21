@@ -1,0 +1,30 @@
+from pathlib import Path
+from pydantic import SecretStr
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+from aiogram import Bot, Dispatcher
+
+ROOT_DIR = Path(__file__).resolve().parent
+
+
+class Config(BaseSettings):
+    BOT_TOKEN: SecretStr
+    SPREADSHEET_ID: SecretStr
+    MANAGER_ID: SecretStr
+
+    WEBHOOK_URL: str = "https://example.com"
+    WEBAPP_URL: str = "https://example.com"
+
+    APP_HOST: str = "localhost"
+    APP_PORT: int = 8080
+
+    model_config = SettingsConfigDict(
+        env_file=ROOT_DIR / ".env",
+        env_file_encoding="utf-8"
+    )
+
+
+config = Config()
+
+bot: Bot = None
+dp: Dispatcher = Dispatcher()

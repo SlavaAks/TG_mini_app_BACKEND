@@ -1,0 +1,1 @@
+from services.exel_parser import fetch_csv_data
