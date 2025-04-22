@@ -6,6 +6,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 import config_reader
+from bot.commands import set_bot_commands
 from bot.handlers import setup_routers as setup_bot_routers
 from api import setup_routers as setup_api_routers
 
@@ -34,6 +35,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator:
     app.state.dp = dp
 
     dp.include_router(setup_bot_routers())
+    await set_bot_commands(bot)
     await bot.set_webhook(
         url=f"{config.WEBHOOK_URL}/webhook",
         allowed_updates=dp.resolve_used_update_types(),

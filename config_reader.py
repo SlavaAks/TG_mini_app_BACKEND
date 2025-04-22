@@ -13,8 +13,8 @@ class Config(BaseSettings):
     MANAGER_ID: SecretStr
     CHANEL_ID: SecretStr
 
-    WEBHOOK_URL: str = "https://cart-voluntary-elimination-bs.trycloudflare.com"
-    WEBAPP_URL: str = "https://thongs-mem-flashing-overview.trycloudflare.com"
+    WEBHOOK_URL: str = "https://bidder-horror-ids-commissioner.trycloudflare.com"
+    WEBAPP_URL: str = "https://on-to-conflict-litigation.trycloudflare.com"
 
     APP_HOST: str = "localhost"
     APP_PORT: int = 8080
