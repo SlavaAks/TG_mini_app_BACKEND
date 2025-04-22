@@ -11,9 +11,10 @@ class Config(BaseSettings):
     BOT_TOKEN: SecretStr
     SPREADSHEET_ID: SecretStr
     MANAGER_ID: SecretStr
+    CHANEL_ID: SecretStr
 
-    WEBHOOK_URL: str = "https://jill-linking-trend-grave.trycloudflare.com"
-    WEBAPP_URL: str = "https://stan-pubs-transcript-chrome.trycloudflare.com"
+    WEBHOOK_URL: str = "https://cart-voluntary-elimination-bs.trycloudflare.com"
+    WEBAPP_URL: str = "https://thongs-mem-flashing-overview.trycloudflare.com"
 
     APP_HOST: str = "localhost"
     APP_PORT: int = 8080

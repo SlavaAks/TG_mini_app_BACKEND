@@ -41,3 +41,4 @@ async def webhook(request: Request) -> None:
 
     except Exception as e:
         raise e
+
