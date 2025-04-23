@@ -34,8 +34,6 @@ async def process_order(order: Order, request: Request):
     bot = request.app.state.bot
     channel_id = config.CHANEL_ID.get_secret_value()
 
-    print(channel_id)
-    # Формируем текст
     lines = [
         "🛍 <b>Новый заказ</b>",
         f"<b>ФИО:</b> {order.fullName}",

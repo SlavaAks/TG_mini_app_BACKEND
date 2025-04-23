@@ -13,8 +13,8 @@ class Config(BaseSettings):
     MANAGER_ID: SecretStr
     CHANEL_ID: SecretStr
 
-    WEBHOOK_URL: str = "https://bidder-horror-ids-commissioner.trycloudflare.com"
-    WEBAPP_URL: str = "https://on-to-conflict-litigation.trycloudflare.com"
+    WEBHOOK_URL: str = "https://alexander-mozambique-world-reports.trycloudflare.com"
+    WEBAPP_URL: str = "https://verde-childhood-tea-du.trycloudflare.com"
 
     APP_HOST: str = "localhost"
     APP_PORT: int = 8080
