@@ -8,12 +8,12 @@ from db import User
 
 router = Router(name="common")
 
-MANAGER_ID = int(config.MANAGER_ID.get_secret_value())
+MANAGER_ID = config.MANAGER_ID
 
 
 @router.message(CommandStart())
 async def start(message: Message):
-    is_admin = message.from_user.id == MANAGER_ID
+    is_admin = message.from_user.id in MANAGER_ID
 
     buttons = [[KeyboardButton(text="🛍 Web App")]]
 

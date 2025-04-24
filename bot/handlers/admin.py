@@ -10,8 +10,7 @@ from services.exel_parser import download_csv_file
 
 router = Router(name='admin')
 
-MANAGER_ID = int(config.MANAGER_ID.get_secret_value())
-
+MANAGER_ID = config.MANAGER_ID
 
 @router.message(or_f(Command("shop"), F.text == "🛍 Web App"))
 async def web_app_handler(message: Message):
@@ -20,7 +19,8 @@ async def web_app_handler(message: Message):
 
 @router.message(or_f(Command("admin"), F.text == "🛠 Admin"))
 async def admin_handler(message: Message):
-    if message.from_user.id == MANAGER_ID:
+    print(MANAGER_ID)
+    if message.from_user.id in MANAGER_ID:
         await message.answer("🔧 Админ-меню:", reply_markup=get_admin_keyboard())
     else:
         await message.answer("🚫 У тебя нет доступа.")

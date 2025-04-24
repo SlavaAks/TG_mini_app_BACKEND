@@ -27,6 +27,9 @@ class Order(BaseModel):
     timestamp: str
     total: float
     zip: Optional[str] = ""
+    city: Optional[str] = ""
+    branchNumber: Optional[str] = ""
+    telegram_link: Optional[str] = None
 
 
 @router.post("/order")
@@ -41,11 +44,18 @@ async def process_order(order: Order, request: Request):
         f"<b>Email:</b> {order.email}",
         f"<b>Длина стопы:</b> {order.size} см",
         f"<b>Доставка:</b> {order.deliveryMethod}",
-        f"<b>Адрес:</b> {order.address}",
     ]
 
-    if order.zip:
-        lines.append(f"<b>Индекс:</b> {order.zip}")
+    # В зависимости от способа доставки добавляем нужные поля
+    if order.deliveryMethod == "Белпочта":
+        lines.append(f"<b>Адрес:</b> {order.address}")
+        if order.zip:
+            lines.append(f"<b>Индекс:</b> {order.zip}")
+    elif order.deliveryMethod == "Европочта":
+        lines.append(f"<b>Номер отделения:</b> {order.branchNumber}")
+    elif order.deliveryMethod == "Самовывоз":
+        lines.append(f"<b>Город самовывоза:</b> {order.city}")
+
     if order.discount:
         lines.append(f"<b>Скидка:</b> {order.discount}")
 
@@ -57,6 +67,9 @@ async def process_order(order: Order, request: Request):
 
     lines.append(f"\n<b>💰 Итого:</b> {order.total} BYN")
     lines.append(f"<i>🕒 Время: {order.timestamp}</i>")
+
+    if order.telegram_link:
+        lines.append(f"\n<a href=\"{order.telegram_link}\">📩 Связаться с клиентом</a>")
 
     text = "\n".join(lines)
 

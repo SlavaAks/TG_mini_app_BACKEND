@@ -1,4 +1,6 @@
 from pathlib import Path
+from typing import List
+
 from pydantic import SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -10,11 +12,11 @@ ROOT_DIR = Path(__file__).resolve().parent
 class Config(BaseSettings):
     BOT_TOKEN: SecretStr
     SPREADSHEET_ID: SecretStr
-    MANAGER_ID: SecretStr
+    MANAGER_ID: List[int]
     CHANEL_ID: SecretStr
 
-    WEBHOOK_URL: str = "https://alexander-mozambique-world-reports.trycloudflare.com"
-    WEBAPP_URL: str = "https://verde-childhood-tea-du.trycloudflare.com"
+    WEBHOOK_URL: str = "https://solve-watershed-font-regards.trycloudflare.com"
+    WEBAPP_URL: str = "https://continent-bytes-florist-sell.trycloudflare.com"
 
     APP_HOST: str = "localhost"
     APP_PORT: int = 8080
