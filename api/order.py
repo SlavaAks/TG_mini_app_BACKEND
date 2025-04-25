@@ -4,7 +4,7 @@ from typing import List, Optional
 
 from config_reader import config
 
-router = APIRouter()
+router = APIRouter(prefix="/api")
 
 
 # Модели данных
