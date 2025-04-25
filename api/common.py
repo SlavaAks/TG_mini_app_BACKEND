@@ -6,7 +6,7 @@ from aiogram.types import Update
 from fastapi.responses import StreamingResponse
 import asyncio
 
-router = APIRouter(prefix="/api")
+router = APIRouter()
 
 subscriber_queues = []
 
