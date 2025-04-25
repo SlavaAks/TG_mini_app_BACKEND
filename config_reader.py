@@ -15,7 +15,7 @@ class Config(BaseSettings):
     MANAGER_ID: List[int]
     CHANEL_ID: SecretStr
 
-    WEBHOOK_URL: str = "https://lawkashop.space"
+    WEBHOOK_URL: str = "https://lawkashop.space/api"
     WEBAPP_URL: str = "https://lawkashop.space"
 
     APP_HOST: str = "localhost"
