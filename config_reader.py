@@ -15,8 +15,8 @@ class Config(BaseSettings):
     MANAGER_ID: List[int]
     CHANEL_ID: SecretStr
 
-    WEBHOOK_URL: str = "https://solve-watershed-font-regards.trycloudflare.com"
-    WEBAPP_URL: str = "https://continent-bytes-florist-sell.trycloudflare.com"
+    WEBHOOK_URL: str = "https://lawkashop.space"
+    WEBAPP_URL: str = "https://lawkashop.space"
 
     APP_HOST: str = "localhost"
     APP_PORT: int = 8080
