@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 
 from services import fetch_csv_data
 
-router = APIRouter()
+router = APIRouter(prefix="/api")
 
 
 @router.get("/catalog")
