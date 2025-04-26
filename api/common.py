@@ -16,7 +16,7 @@ async def notify_all(message: str):
         await queue.put(message)
 
 
-@router.get("/sse")
+@router.get("/sse/")
 async def sse(request: Request):
     queue = asyncio.Queue()
     subscriber_queues.append(queue)
