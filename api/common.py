@@ -1,10 +1,12 @@
 from fastapi import APIRouter, Request
 
 from aiogram.types import Update
+from datetime import datetime
 
 
 from fastapi.responses import StreamingResponse
 import asyncio
+from typing import Optional
 
 router = APIRouter()
 
@@ -14,6 +16,29 @@ subscriber_queues = []
 async def notify_all(message: str):
     for queue in subscriber_queues:
         await queue.put(message)
+
+
+# Переменная для хранения последнего времени обновления
+last_updated: Optional[datetime] = None
+
+def set_last_updated():
+    global last_updated
+    last_updated = datetime.utcnow()
+    print(f"✅ Last updated set to {last_updated.isoformat()}")
+
+def get_last_updated() -> Optional[datetime]:
+    return last_updated
+
+@router.get("/last-updated")
+async def last_updated_endpoint():
+    """
+    Эндпоинт для получения времени последнего обновления данных
+    """
+    last_updated = get_last_updated()
+    if last_updated is None:
+        return {"last_updated": None}
+    return {"last_updated": last_updated.isoformat()}
+
 
 
 @router.get("/sse/")
