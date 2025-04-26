@@ -18,7 +18,6 @@ class CartItem(BaseModel):
 class Order(BaseModel):
     fullName: str
     phone: str
-    email: str
     size: str
     deliveryMethod: str
     address: str
@@ -41,7 +40,6 @@ async def process_order(order: Order, request: Request):
         "🛍 <b>Новый заказ</b>",
         f"<b>ФИО:</b> {order.fullName}",
         f"<b>Телефон:</b> {order.phone}",
-        f"<b>Email:</b> {order.email}",
         f"<b>Длина стопы:</b> {order.size} см",
         f"<b>Доставка:</b> {order.deliveryMethod}",
     ]
