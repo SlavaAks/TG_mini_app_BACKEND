@@ -21,12 +21,12 @@ async def notify_all(message: str):
 # Переменная для хранения последнего времени обновления
 last_updated: Optional[datetime] = None
 
-def set_last_updated():
+async def set_last_updated():
     global last_updated
     last_updated = datetime.utcnow()
     print(f"✅ Last updated set to {last_updated.isoformat()}")
 
-def get_last_updated() -> Optional[datetime]:
+async def get_last_updated() -> Optional[datetime]:
     return last_updated
 
 @router.get("/last-updated")

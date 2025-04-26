@@ -2,7 +2,7 @@ from aiogram import Router, F
 from aiogram.filters import Command, or_f
 from aiogram.types import Message, CallbackQuery
 
-from api.common import notify_all
+from api.common import notify_all, set_last_updated
 from bot.keyboards import main_markup
 from bot.keyboards.admin import get_admin_keyboard
 from config_reader import config
@@ -31,6 +31,7 @@ async def update_csv(callback: CallbackQuery):
     try:
         await download_csv_file()
         await notify_all('update')
+        await set_last_updated()
         await callback.answer("✅ CSV обновлён!")
         await callback.message.edit_text("✅ CSV обновлён!", reply_markup=get_admin_keyboard())
     except Exception as e:
