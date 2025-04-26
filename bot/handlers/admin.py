@@ -31,7 +31,7 @@ async def update_csv(callback: CallbackQuery):
     try:
         await download_csv_file()
         await notify_all('update')
-        await set_last_updated()
+        set_last_updated()
         await callback.answer("✅ CSV обновлён!")
         await callback.message.edit_text("✅ CSV обновлён!", reply_markup=get_admin_keyboard())
     except Exception as e:
