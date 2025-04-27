@@ -36,7 +36,7 @@ async def fetch_csv_data():
     try:
         if not os.path.exists(CSV_FILE_PATH):
             await download_csv_file()
-        df = pd.read_csv(CSV_FILE_PATH, header=None)
+        df = pd.read_csv(CSV_FILE_PATH, encoding='utf-8', header=None)
         df = df.replace({pd.NA: None, float("nan"): None})
         data = df.to_dict(orient="records")
 
