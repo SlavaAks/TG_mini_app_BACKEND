@@ -20,7 +20,6 @@ async def download_csv_file():
     try:
         response = requests.get(CSV_URL)
         response.raise_for_status()
-        print(response.text)
         with open(CSV_FILE_PATH, 'w',) as f:
             f.write(response.content.decode('utf-8'))
 
