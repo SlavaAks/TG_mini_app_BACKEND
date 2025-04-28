@@ -34,6 +34,7 @@ async def last_updated_endpoint():
     """
     Эндпоинт для получения времени последнего обновления данных
     """
+    global last_updated
     last_updated = get_last_updated()
     if last_updated is None:
         return {"last_updated": None}
