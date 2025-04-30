@@ -13,6 +13,7 @@ class CartItem(BaseModel):
     articul: str
     size: str
     price: float
+    color: str
 
 
 class Order(BaseModel):
@@ -60,7 +61,7 @@ async def process_order(order: Order, request: Request):
     lines.append("\n<b>🧾 Товары:</b>")
     for item in order.cart:
         lines.append(
-            f"• {item.title} ({item.articul})\n  Размер: {item.size} — {item.price} BYN"
+            f"• {item.title} ({item.articul})\n  Размер: {item.size} {item.color} — {item.price} BYN"
         )
 
     lines.append(f"\n<b>💰 Итого:</b> {order.total} BYN")
